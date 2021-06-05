@@ -70,7 +70,7 @@ class Cipher:
                     tempTwo += char
             tempOne = tempTwo
             tempTwo = ""
-        self.mod = tempOne
+        self.mod = tempOne.lower()
     # end updateText
 
     # ------------\
@@ -109,13 +109,11 @@ class Cipher:
     # ------------\
     # modifyKey()  \
     # -----------------------------------------------------------
-    def modifyKey(self) -> None:
+    def modifyKey(self, key) -> None:
         """
         Creates a guiObj object to let the user modify the key in a GUI
         """
-        guiObj = gui.guiTk(self.key)
-        guiObj.initMod()
-        self.key = guiObj.key
+        self.key = key
         self.updateText()
     # end modifyKey
 
