@@ -1,0 +1,49 @@
+.nav-link {
+    animation-duration: 2s;
+    font-size: 30px;
+    color: #111111;
+}
+.nav-link:hover {
+    color: #888888
+}
+.center {
+    text-align: center;
+}
+.inClass {
+    padding-top: 20px;
+}
+#ct {
+    width: 60%;
+    margin: auto;
+    display: block;
+    height: 40vh;
+    overflow: auto;
+}
+.sbm {
+    width: 60%;
+    margin: auto;
+    display: block;
+}
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #ddd;
+    text-align: center;
+}
+.main{
+    display: none;
+}
+.col-sm{
+    border: 1px solid black;
+    margin: 5px;
+}
+.row-sm{
+    border: 1px solid black;
+}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}hey friend {% endblock %}
+
+{% block content %}
+
+<div class="container submit-ct">
+    <div class="center" style="padding-top:20px">
+        <h2>
+            Paste or upload the ciphertext:
+        </h2>
+    </div>
+    <div class="inClass">
+        <textarea type="text" id="ct" name="ct"></textarea>
+    </div>
+    <div class ="inClass">
+        <div class="sbm">
+            <div class="row">
+                <div class="col-lg uplBtn">
+                    <form action="/upload-image" method="POST" enctype="multipart/form-data">
+                        <label class="custom-file-upload">
+                            <input type="file" accept=".txt" class="file" name="fileUp" id="fileUp">
+                            Custom Upload
+                        </label>
+                    </form>
+                </div>
+                <div class="col-lg">
+                    <div class="col-lg"><button type="button" class="btn btn-primary button-submit-ct" style="width:100%">Submit</button></div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="container main">
+    <div class="row">
+        <div class="col-sm key">
+            <table>
+                <span id="keyHere"></span>
+            </table>
+        </div>
+        <div class="col-sm">
+            <div class="col">
+                <div class="row-sm modified">
+                    
+                </div>
+                <div class="row-sm original" style="margin-top: 5px">
+                    ....
+                </div>
+            </div>
+        </div>
+        <div class="col-sm attacks">
+          sus lol
+        </div>
+      </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
