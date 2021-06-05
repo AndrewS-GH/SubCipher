@@ -15,7 +15,6 @@ def getCT():
     if request.method == "POST":
         cipherObj = cipher.Cipher(request.get_json())
         keyVals = cipherObj.getKey()
-        print(keyVals)
         results = {
             "key": cipherObj.getKey(),
             "orig": cipherObj.getOrig()

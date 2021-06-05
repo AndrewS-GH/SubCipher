@@ -40,10 +40,17 @@ input[type="file"] {
 .main{
     display: none;
 }
-.col-sm{
+.col-test{
     border: 1px solid black;
-    margin: 5px;
 }
 .row-sm{
     border: 1px solid black;
+}
+.keyButtons button{
+    margin-top: 10px;
+}
+.twoTexts textarea{
+    overflow: auto;
+    width: 90%;
+    min-height: 30vh;
 }

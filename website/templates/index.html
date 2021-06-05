@@ -5,9 +5,7 @@
 
 <div class="container submit-ct">
     <div class="center" style="padding-top:20px">
-        <h2>
-            Paste or upload the ciphertext:
-        </h2>
+        <h2>Paste or upload the ciphertext:</h2>
     </div>
     <div class="inClass">
         <textarea type="text" id="ct" name="ct"></textarea>
@@ -34,34 +32,33 @@
 
 <div class="container main">
     <div class="row">
-        <div class="col-sm key">
-            <table>
-                <span id="keyHere"></span>
-            </table>
+        <div class="col-md-2 key col-test">
+            <div class="row keyButtons">
+                    <table>
+                        <span id="keyHere"></span>
+                    </table>
+                    <button type="button" class="btn btn-primary button-submit-key">Submit Key</button>
+                    <button type="button" class="btn btn-primary button-submit-swap">Swap by Freq</button>
+                    <button type="button" class="btn btn-danger button-submit-reset">Reset Key</button>
+            </div>
         </div>
-        <div class="col-sm">
+        <div class="col-md-5 col-test twoTexts">
             <div class="col">
-                <div class="row-sm modified">
-                    
+                <div class="row-sm">
+                    <h2>Modified</h2>
+                    <textarea type="text" id="modified"></textarea>
                 </div>
                 <div class="row-sm original" style="margin-top: 5px">
-                    ....
+                    <h2>Original</h2>
+                    <textarea type="text" id="original"></textarea>
                 </div>
             </div>
         </div>
-        <div class="col-sm attacks">
+        <div class="col-md-5 attacks col-test">
           sus lol
         </div>
       </div>
 </div>
-
-
-
-
-
-
-
-
 
 
 

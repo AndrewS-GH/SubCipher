@@ -31,7 +31,6 @@ function submitCT()
     }
     else
     {
-        var result;
         $.ajax({
             type: 'POST',
             url: '/sendCT',
@@ -46,6 +45,7 @@ function submitCT()
 
 function swapInputs(data)
 {
+    console.log(data);
     var keyLines = data["key"].split("\n");
     var line = ""
     $("#keyHere").text("");
@@ -55,6 +55,8 @@ function swapInputs(data)
         $("#keyHere").append(line);
 
     }
+    $("#modified").text(data["orig"]);
+    $("#original").text(data["orig"]);
     $(".submit-ct").css("display", "none");
     $(".main").css("display", "block");
 }
