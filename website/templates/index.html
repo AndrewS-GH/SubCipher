@@ -32,7 +32,7 @@
 
 <div class="container main">
     <div class="row">
-        <div class="col-md-2 key">
+        <div class="col-md-3 key">
             <div class="row keyButtons">
                     <table id="keyHere">
                         
@@ -42,29 +42,29 @@
                     <button type="button" class="btn btn-danger button-submit-reset">Reset Key</button>
             </div>
         </div>
-        <div class="col-md-5 twoTexts">
+        <div class="col-md-6 twoTexts">
             <div class="col">
                 <div class="row-sm">
                     <h2>Modified</h2>
-                    <textarea type="text" id="modified"></textarea>
+                    <textarea type="text" id="modified" readonly></textarea>
                 </div>
                 <div class="row-sm original" style="margin-top: 5px">
                     <h2>Original</h2>
-                    <textarea type="text" id="original"></textarea>
+                    <textarea type="text" id="original" readonly></textarea>
                 </div>
             </div>
         </div>
-        <div class="col-md-5 attacks">
+        <div class="col-md-3 attacks">
             <div id="letterFreq">
                 <label>
-                    Generate Substrings of length:
-                    <input type="number" min="0" id="lenSS" value="1" size="5">
-                    <button type="button" class="btn btn-primary" id="subLenSS">Generate</button>
+                    <button type="button" class="btn btn-primary" id="subLenSS" style="margin-bottom:5px">Generate</button>
+                    Substrings of length:
+                    <input type="number" min="0" id="lenSS" value="1" size="3">
                 </label>
                 <br>
-                <label>
-                    Or generate all duplicate substrings:
+                <label style="margin-top:10px">
                     <button type="button" class="btn btn-primary" id="subDupSS">Generate</button>
+                    all duplicate substrings
                 </label>
                 <table id="engAttackTable">
                         

@@ -38,10 +38,14 @@ input[type="file"] {
     text-align: center;
 }
 .main{
+    margin-top: 20px;
     display: none;
-}
-.main{
     border: 1px solid black;
+    background: #DEDEDE;
+    border-radius: 10px;
+}
+.main div {
+    padding: 10px;
 }
 
 .keyButtons button{
@@ -59,4 +63,13 @@ input[type='number']{
     overflow: auto;
     width: 90%;
     min-height: 30vh;
+}
+.navbar {
+    background: #A9A9A9;
+}
+body {
+    background: #EFEFEF;
+}
+textarea {
+    background: #FFFAFA;;
 }
