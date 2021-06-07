@@ -40,16 +40,22 @@ input[type="file"] {
 .main{
     display: none;
 }
-.col-test{
+.main{
     border: 1px solid black;
 }
-.row-sm{
-    border: 1px solid black;
-}
+
 .keyButtons button{
     margin-top: 10px;
 }
 .twoTexts textarea{
+    overflow: auto;
+    width: 90%;
+    min-height: 30vh;
+}
+input[type='number']{
+    width: 60px;
+} 
+#engAttacks {
     overflow: auto;
     width: 90%;
     min-height: 30vh;

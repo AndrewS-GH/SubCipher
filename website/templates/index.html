@@ -32,7 +32,7 @@
 
 <div class="container main">
     <div class="row">
-        <div class="col-md-2 key col-test">
+        <div class="col-md-2 key">
             <div class="row keyButtons">
                     <table id="keyHere">
                         
@@ -42,7 +42,7 @@
                     <button type="button" class="btn btn-danger button-submit-reset">Reset Key</button>
             </div>
         </div>
-        <div class="col-md-5 col-test twoTexts">
+        <div class="col-md-5 twoTexts">
             <div class="col">
                 <div class="row-sm">
                     <h2>Modified</h2>
@@ -54,8 +54,22 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 attacks col-test">
-          sus lol
+        <div class="col-md-5 attacks">
+            <div id="letterFreq">
+                <label>
+                    Generate Substrings of length:
+                    <input type="number" min="0" id="lenSS" value="1" size="5">
+                    <button type="button" class="btn btn-primary" id="subLenSS">Generate</button>
+                </label>
+                <br>
+                <label>
+                    Or generate all duplicate substrings:
+                    <button type="button" class="btn btn-primary" id="subDupSS">Generate</button>
+                </label>
+                <table id="engAttackTable">
+                        
+                </table>
+            </div>
         </div>
       </div>
 </div>

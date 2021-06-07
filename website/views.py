@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, flash, jsonify, make_response
+import numpy as np
 from . import cipher
 
 views = Blueprint('views', __name__)
@@ -43,3 +44,24 @@ def swapByFreq():
             "plaintext": cipherObj.getCipher()
         }
         return jsonify(results)
+
+@views.route('/genSS', methods = ['POST', 'GET'])
+def genSS():
+    if request.method == "POST":
+        result=request.get_json()
+        dictList = []
+        for key, value in cipherObj.getCommSS(int(result)).items():
+            temp = [key,value]
+            dictList.append(temp)
+
+        return jsonify(dictList)
+
+@views.route('/dupSS', methods = ['POST', 'GET'])
+def dupSS():
+    if request.method == "POST":
+        dictList = []
+        for key, value in cipherObj.getDupSS().items():
+            temp = [key,value]
+            dictList.append(temp)
+
+        return jsonify(dictList)

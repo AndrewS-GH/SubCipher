@@ -6,6 +6,52 @@ $(".file").change(getFile);
 $(".button-submit-ct").click(submitCT);
 $(".button-submit-key").click(modKey);
 $(".button-submit-swap").click(swapByFreq);
+$("#subLenSS").click(genSS);
+$("#subDupSS").click(genDup);
+
+function genDup()
+{
+    $.ajax({
+        type: 'POST',
+        url: '/dupSS',
+        contentType: 'application/JSON',
+        data: "",
+        success: function(data){
+            errorLine="<tr><td>No duplicate value substrings</td></tr>";
+            updateEngAttacks(data, errorLine);
+        }
+    });
+}
+
+function genSS()
+{
+    var lenSS = $("#lenSS").val();
+    $.ajax({
+        type: 'POST',
+        url: '/genSS',
+        contentType: 'application/JSON',
+        data: JSON.stringify(lenSS),
+        success: function(data){
+            var errorLine="<tr><td>No Values for substrings of length " + lenSS + "</td></tr>"
+            updateEngAttacks(data, errorLine);
+        }
+    });
+}
+function updateEngAttacks(data, errorLine)
+{
+    
+    $("#engAttackTable tr").remove()
+    if (data.length === 0)
+    {
+        $("#engAttackTable").append(errorLine)
+    }
+   for (var i=0; i < data.length; i++)
+   {
+       var line = "<tr><td>" + data[i][0] + "&nbsp;&rarr;</td><td>" + data[i][1] + "</td></tr>"
+       $("#engAttackTable").append(line)
+   }
+    
+}
 
 function swapByFreq()
 {

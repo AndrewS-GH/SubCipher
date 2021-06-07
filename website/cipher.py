@@ -175,13 +175,13 @@ class Cipher:
     # -----------------------------------------------------------
     def getCommSS(self, numSS: int) -> dict:
         """
-        Prints the top 10 substrings of size numSS
+        Prints the top x substrings of size numSS
         Param numSS: an integer representing the size of substrings the
                       user wants printed
         """
         dictSS = {}
         copyCipher = re.sub(r"[^a-zA-Z0-9 ]", '', self.original)
-        defVals = 10
+        defVals = 30
         while copyCipher:
             vals = copyCipher[0:numSS]
             if len(vals) == numSS and " " not in vals:
@@ -190,7 +190,7 @@ class Cipher:
                 else:
                     dictSS[vals] = 1
             copyCipher = copyCipher[1:]
-        if len(dictSS) < 10:
+        if len(dictSS) < defVals:
             defVals = len(dictSS)
         res = dict(sorted(dictSS.items(), key=itemgetter(1),
                           reverse=True)[:defVals])
@@ -206,7 +206,7 @@ class Cipher:
         """
         dictSS = {}
         copyCipher = re.sub(r"[^a-zA-Z0-9 ]", '', self.original)
-        defVals = 10
+        defVals = 30
         while copyCipher:
             vals = copyCipher[0:2]
             if len(vals) == 2:
@@ -216,8 +216,10 @@ class Cipher:
                     else:
                         dictSS[vals] = 1
             copyCipher = copyCipher[1:]
-        if len(dictSS) < 10:
+        if len(dictSS) < defVals:
             defVals = len(dictSS)
+        if "  " in dictSS:
+            dictSS.pop("  ")
         res = dict(sorted(dictSS.items(), key=itemgetter(1),
                           reverse=True)[:defVals])
         return res
