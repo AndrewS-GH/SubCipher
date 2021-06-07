@@ -10,7 +10,7 @@ def home():
     return render_template("index.html")
 
 @views.route('/sendCT', methods = ['GET', 'POST'])
-def getCT():
+def sendCT():
     if request.method == "POST":
         global cipherObj
         cipherObj = cipher.Cipher(request.get_json())
