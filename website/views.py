@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, request, flash, jsonify, make_response
-import numpy as np
 from . import cipher
 
 views = Blueprint('views', __name__)

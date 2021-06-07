@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% block title %}hey friend {% endblock %}
-
 {% block content %}
 
+<!-- Submitting ciphertext -->
 <div class="container submit-ct">
     <div class="center" style="padding-top:20px">
         <h2>Paste or upload the ciphertext:</h2>
     </div>
-    <div class="inClass">
+    <div style="padding-top:20px">
         <textarea type="text" id="ct" name="ct"></textarea>
     </div>
-    <div class ="inClass">
+    <div style="padding-top:20px">
         <div class="sbm">
             <div class="row">
                 <div class="col-lg uplBtn">
@@ -30,18 +30,21 @@
     </div>
 </div>
 
+<!-- Main Program -->
 <div class="container main">
     <div class="row">
+
+        <!-- first column (key) -->
         <div class="col-md-3 key">
             <div class="row keyButtons">
-                    <table id="keyHere">
-                        
-                    </table>
+                    <table id="keyHere"></table>
                     <button type="button" class="btn btn-primary button-submit-key">Submit Key</button>
                     <button type="button" class="btn btn-primary button-submit-swap">Swap by Freq</button>
                     <button type="button" class="btn btn-danger button-submit-reset">Reset Key</button>
             </div>
         </div>
+
+        <!-- second column (modified and original texts) -->
         <div class="col-md-6 twoTexts">
             <div class="col">
                 <div class="row-sm">
@@ -54,6 +57,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- third column (attacks) -->
         <div class="col-md-3 attacks">
             <div id="letterFreq">
                 <label>
@@ -66,15 +71,11 @@
                     <button type="button" class="btn btn-primary" id="subDupSS">Generate</button>
                     all duplicate substrings
                 </label>
-                <table id="engAttackTable">
-                        
-                </table>
+                <table id="engAttackTable"></table>
             </div>
         </div>
-      </div>
+
+    </div>
 </div>
-
-
-
 
 {% endblock %}

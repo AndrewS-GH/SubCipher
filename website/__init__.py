@@ -7,7 +7,6 @@ def create_app():
     from . import cipher
     from .views import views
     
-
     app.register_blueprint(views, url_prefix="/")
 
     return app
