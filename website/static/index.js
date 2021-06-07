@@ -6,8 +6,30 @@ $(".file").change(getFile);
 $(".button-submit-ct").click(submitCT);
 $(".button-submit-key").click(modKey);
 $(".button-submit-swap").click(swapByFreq);
+$(".button-submit-reset").click(resetCipher);
 $("#subLenSS").click(genSS);
 $("#subDupSS").click(genDup);
+
+function resetCipher()
+{
+    var table = document.getElementById("keyHere")
+    var trs = table.getElementsByTagName("tr");
+    var tds = null;
+    for (var i=0; i<trs.length; i++)
+    {
+        tds = trs[i].getElementsByTagName("td");
+        document.getElementById("keyVal-" + String(i)).value = tds[0].innerHTML[0];
+    }
+
+    $("#modified").text($("#original").text());    
+
+    $.ajax({
+        type: 'POST',
+        url: '/resetCipher',
+        contentType: 'application/JSON',
+        data: ""
+    });
+}
 
 function genDup()
 {
@@ -72,7 +94,6 @@ function swapKeyCol(key)
     var keyVals = key.split("\n");
     var table = document.getElementById("keyHere")
     var trs = table.getElementsByTagName("tr");
-    var tds = null;
     for (var i=0; i<trs.length; i++)
     {
         document.getElementById("keyVal-" + String(i)).value = keyVals[i][2];

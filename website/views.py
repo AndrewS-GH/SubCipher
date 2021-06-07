@@ -65,3 +65,9 @@ def dupSS():
             dictList.append(temp)
 
         return jsonify(dictList)
+
+@views.route('/resetCipher', methods = ['POST', 'GET'])
+def resetCipher():
+    if request.method == "POST":
+        cipherObj.reset()
+        return ""
