@@ -21,8 +21,8 @@ class Cipher:
         """
         init
         """
-        self.original = cipher
-        self.mod = cipher
+        self.original = cipher.lower()
+        self.mod = cipher.lower()
         self.key = {}
         self.generateKey()
     # end init
@@ -64,7 +64,7 @@ class Cipher:
             valNew = item[1]
             for char in tempOne:
                 if char == valOld:
-                    if valNew != "0":
+                    if valNew != "_":
                         tempTwo += valNew.upper()
                 else:
                     tempTwo += char
