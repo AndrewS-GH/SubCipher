@@ -4,6 +4,7 @@ $(".button-submit-key").click(modKey);
 $(".button-submit-swap").click(swapByFreq);
 $(".button-submit-reset").click(resetCipher);
 $("#subLenSS").click(genSS);
+$("#subLenWord").click(genWord);
 $("#subDupSS").click(genDup);
 
 // reads user inputted text file and populates text area with contents
@@ -160,7 +161,25 @@ function genSS()
         contentType: 'application/JSON',
         data: JSON.stringify(lenSS),
         success: function(data){
-            errorLine="<tr><td>No Values for substrings of length " + lenSS + "</td></tr>"
+            errorLine="<tr><td>No values for substrings of length " + lenSS + "</td></tr>";
+            updateEngAttacks(data, errorLine);
+        }
+    });
+}
+
+function genWord()
+{
+    var lenWord = $("#lenWord").val(); // length inputted by user
+    var errorLine = ""; // unique error sent to updateEngAttacks function
+
+    // generates common substrings in the backend
+    $.ajax({
+        type: 'POST',
+        url: '/genWord',
+        contentType: 'application/JSON',
+        data: JSON.stringify(lenWord),
+        success: function(data){
+            errorLine="<tr><td>No values for words of length " + lenWord + "</td></tr>";
             updateEngAttacks(data, errorLine);
         }
     });

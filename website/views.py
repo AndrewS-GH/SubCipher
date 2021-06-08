@@ -55,6 +55,17 @@ def genSS():
 
         return jsonify(dictList)
 
+@views.route('/genWord', methods = ['POST', 'GET'])
+def genWord():
+    if request.method == "POST":
+        result=request.get_json()
+        dictList = []
+        for key, value in cipherObj.getCommWords(int(result)).items():
+            temp = [key,value]
+            dictList.append(temp)
+
+        return jsonify(dictList)
+
 @views.route('/dupSS', methods = ['POST', 'GET'])
 def dupSS():
     if request.method == "POST":
