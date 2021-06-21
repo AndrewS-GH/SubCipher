@@ -4,6 +4,7 @@ $(".button-submit-key").click(modKey);
 $(".button-submit-swap").click(swapByFreq);
 $(".button-submit-reset").click(resetCipher);
 $("#subLenSS").click(genSS);
+$("#subLenWord").click(genWord);
 $("#subDupSS").click(genDup);
 
 // reads user inputted text file and populates text area with contents
@@ -68,13 +69,17 @@ function modKey()
     var tds = null;
     var firstCol = ""; // the values in the original text
     var secondCol = ""; // the values in the modified text
+    var checkMissing = "";
 
     // populates firstCol and secondCol to pass to python
     for (var i=0; i<trs.length; i++)
     {
         tds = trs[i].getElementsByTagName("td");
         firstCol += tds[0].innerHTML[0] + " ";
-        secondCol += document.getElementById("keyVal-" + String(i)).value + " ";
+        checkMissing = document.getElementById("keyVal-" + String(i)).value;
+        if (checkMissing === "") { alert("Error: cannot leave any inputs blank"); return;}
+        else if (checkMissing === " ") { alert("Error: cannot leave any inputs with whitespace"); return; }
+        secondCol += checkMissing + " ";
     }
 
     // passes to python to update the key for the cipher
@@ -156,7 +161,25 @@ function genSS()
         contentType: 'application/JSON',
         data: JSON.stringify(lenSS),
         success: function(data){
-            errorLine="<tr><td>No Values for substrings of length " + lenSS + "</td></tr>"
+            errorLine="<tr><td>No values for substrings of length " + lenSS + "</td></tr>";
+            updateEngAttacks(data, errorLine);
+        }
+    });
+}
+
+function genWord()
+{
+    var lenWord = $("#lenWord").val(); // length inputted by user
+    var errorLine = ""; // unique error sent to updateEngAttacks function
+
+    // generates common substrings in the backend
+    $.ajax({
+        type: 'POST',
+        url: '/genWord',
+        contentType: 'application/JSON',
+        data: JSON.stringify(lenWord),
+        success: function(data){
+            errorLine="<tr><td>No values for words of length " + lenWord + "</td></tr>";
             updateEngAttacks(data, errorLine);
         }
     });
@@ -196,3 +219,29 @@ function updateEngAttacks(data, errorLine)
        $("#engAttackTable").append(line)
    }   
 }
+
+// Help menus
+$("#keyTool").click(function(){
+    $("#toolText").css("display", "none");
+    $("#toolAttack").css("display", "none");
+
+    var display = $("#toolKey").css("display");
+    if (display === "block") { $("#toolKey").css("display", "none"); }
+    else { $("#toolKey").css("display", "block"); }
+});
+$("#textTool").click(function(){
+    $("#toolAttack").css("display", "none");
+    $("#toolKey").css("display", "none");
+
+    var display = $("#toolText").css("display");
+    if (display === "block") { $("#toolText").css("display", "none"); }
+    else { $("#toolText").css("display", "block"); }
+});
+$("#attackTool").click(function(){
+    $("#toolKey").css("display", "none");
+    $("#toolText").css("display", "none");
+
+    var display = $("#toolAttack").css("display");
+    if (display === "block") { $("#toolAttack").css("display", "none"); }
+    else { $("#toolAttack").css("display", "block"); }
+});

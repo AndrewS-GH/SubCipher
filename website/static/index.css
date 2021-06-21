@@ -68,5 +68,19 @@ body {
     background: #EFEFEF;
 }
 textarea {
-    background: #FFFAFA;;
+    background: #FFFAFA;
+}
+.tooltip-container{
+    color: blue;
+}
+.tooltip-container:hover{
+    cursor: pointer;
+}
+.invis {
+    margin-top: 10px;
+    border: 1px solid black;
+    padding: 10px;
+    background: #DEDEDE;
+    border-radius: 10px;
+    display: none;
 }

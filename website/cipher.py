@@ -21,8 +21,8 @@ class Cipher:
         """
         init
         """
-        self.original = cipher
-        self.mod = cipher
+        self.original = cipher.lower()
+        self.mod = cipher.lower()
         self.key = {}
         self.generateKey()
     # end init
@@ -64,7 +64,7 @@ class Cipher:
             valNew = item[1]
             for char in tempOne:
                 if char == valOld:
-                    if valNew != "0":
+                    if valNew != "_":
                         tempTwo += valNew.upper()
                 else:
                     tempTwo += char
@@ -181,7 +181,7 @@ class Cipher:
         """
         dictSS = {}
         copyCipher = re.sub(r"[^a-zA-Z0-9 ]", '', self.original)
-        defVals = 30
+        defVals = 25
         while copyCipher:
             vals = copyCipher[0:numSS]
             if len(vals) == numSS and " " not in vals:
@@ -195,7 +195,34 @@ class Cipher:
         res = dict(sorted(dictSS.items(), key=itemgetter(1),
                           reverse=True)[:defVals])
         return res
-    # end showCommSS
+    # end getCommSS
+
+    # ---------------\
+    # getCommWords()  \
+    # -----------------------------------------------------------
+    def getCommWords(self, numWord: int) -> dict:
+        """
+        Prints the top x words of size numWord
+        Param numSS: an integer representing the size of words the
+        user wants printed
+        """
+        dictSS = {}
+        copyCipher = re.sub(r"[^a-zA-Z0-9 ]", '', self.original)
+        copyCipher = copyCipher.split()
+        defVals = 25
+        for word in copyCipher:
+            if len(word) == numWord:
+                if word in dictSS.keys():
+                    dictSS[word] += 1
+                else:
+                    dictSS[word] = 1
+        if len(dictSS) < defVals:
+            defVals = len(dictSS)
+        res = dict(sorted(dictSS.items(), key=itemgetter(1),
+                        reverse=True)[:defVals])
+        return res
+        # end getCommWords
+
 
         # -----------\
         # getDupSS()  \
@@ -206,7 +233,7 @@ class Cipher:
         """
         dictSS = {}
         copyCipher = re.sub(r"[^a-zA-Z0-9 ]", '', self.original)
-        defVals = 30
+        defVals = 25
         while copyCipher:
             vals = copyCipher[0:2]
             if len(vals) == 2:
@@ -223,7 +250,7 @@ class Cipher:
         res = dict(sorted(dictSS.items(), key=itemgetter(1),
                           reverse=True)[:defVals])
         return res
-    # end showDupSS
+    # end getDupSS
 
     # --------\
     # reset()  \

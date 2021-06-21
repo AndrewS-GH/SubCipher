@@ -30,12 +30,54 @@
     </div>
 </div>
 
+<!-- Tooltip helpers -->
+
+<!-- key modification -->
+<div class="container invis" id="toolKey">
+    <h3>Key Modification Tips</h3>
+    <ul>
+        <li>If you want a letter to be removed from the modified text, use a '_' (underscore)</li>
+        &emsp;* IE: heililio with 'i -> _' yields hello<br>
+        <li>The values on the left which represent the value in the original ciphertext, are ordered from most frequent at the top, to least frequent at the bottom<br></li>
+        <li>- Swap By Freq will modify the key with the order of English letter frequency<br></li>
+        &emsp;* IE: since 'e' is the most common letter in English, this feature will replace the most frequent letter of your ciphertext with 'e'
+    </ul>
+</div>
+
+<!-- General tips -->
+<div class="container invis" id="toolText">
+    <h3>General Tips</h3>
+    <ul>
+        <li>Compare the letter/substring/word frequencies you can generate on the right, to the most common ones in english</li>
+        <li>Single letter words can only be A or I</li>
+        <li>If your text has apostrophes, they are generally followed by S, T, D, M, LL, or RE.</li>
+    </ul>
+</div>
+
+<!-- Letter frequencies -->
+<div class="container invis" id="toolAttack">
+    <h3>Frequency tips</h3>
+    <ul>
+        <li>Most frequent letters: e t a o i n s r h d l u c m f y w g p b v k x q j z</li>
+        <li>Most frequent digraphs: th er on an re he in ed nd ha at en es of or nt ea ti to it st io le is ou ar as de rt ve</li>
+        <li>Most frequent trigraphs: the and tha ent ion tio for nde has nce edt tis oft sth men</li>
+        <li>Most frequent doubles: ss ee tt ff ll mm oo</li>
+        <li>Most frequent two letter words: of to in it is be as at so we he by or on do if me my up an go no us am</li>
+        <li>Most frequent three letter words: the and for are but not you all any can had her was one our out day get has him his how man new now old see two way who boy did its let put say she too use</li>
+        <li>Most frequent four letter words: that with have this will your from they know want been good much some time</li>
+        <li>Most frequent initial letters: t o a w b c d s f m r h i y e g l n p u j k</li>
+        <li>Most frequent final letters: e s t d n r y f l o g h a k m p u w</li>
+    </ul>
+</div>
+
 <!-- Main Program -->
 <div class="container main">
     <div class="row">
 
         <!-- first column (key) -->
         <div class="col-md-3 key">
+            <h2 class="center">Modify Key <span class="tooltip-container" id="keyTool">&#9432</span></h2>
+            
             <div class="row keyButtons">
                     <table id="keyHere"></table>
                     <button type="button" class="btn btn-primary button-submit-key">Submit Key</button>
@@ -46,6 +88,7 @@
 
         <!-- second column (modified and original texts) -->
         <div class="col-md-6 twoTexts">
+            <h2 class="center">Ciphertext & Modified Text <span class="tooltip-container" id="textTool">&#9432</span></h2>
             <div class="col">
                 <div class="row-sm">
                     <h2>Modified</h2>
@@ -60,11 +103,20 @@
 
         <!-- third column (attacks) -->
         <div class="col-md-3 attacks">
+            <h2 class="center">Frequencies <span class="tooltip-container" id="attackTool">&#9432</span></h2>
             <div id="letterFreq">
                 <label>
                     <button type="button" class="btn btn-primary" id="subLenSS" style="margin-bottom:5px">Generate</button>
-                    Substrings of length:
+                    strings of length:
                     <input type="number" min="1" id="lenSS" value="1" size="3">
+                    or
+                </label>
+                <br>
+                <label>
+                    <button type="button" class="btn btn-primary" id="subLenWord" style="margin-bottom:5px; margin-top:5px">Generate</button>
+                    words of length:
+                    <input type="number" min="1" id="lenWord" value="1" size="3">
+                    or
                 </label>
                 <br>
                 <label style="margin-top:10px">
