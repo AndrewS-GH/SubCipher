@@ -14,11 +14,11 @@ def sendCT():
     if request.method == "POST":
         global cipherObj
         cipherObj = cipher.Cipher(request.get_json())
-        keyVals = cipherObj.getKey()
         results = {
-            "key": cipherObj.getKey(),
+            "key": cipherObj.getKey(as_str=True),
             "orig": cipherObj.getOrig()
         }
+        print(results)
         return jsonify(results)
 
 @views.route('/modKey', methods = ['GET', 'POST'])
