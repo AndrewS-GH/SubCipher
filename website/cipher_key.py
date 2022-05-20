@@ -5,14 +5,22 @@ Extends dictionary to generate items from the cipher text, and guards __setitem_
 
 """
 from collections import Counter
+from typing import Optional
 
 
 class CipherKey(dict):
-    
-    def __init__(self, cipher_text: str):
+
+    def __init__(self, cipher_text: str, optional_key: Optional[dict] = None):
         self._cipher_text = cipher_text  # original cipher text
         self._valid_chars = set([char for char in cipher_text.lower() if char.isalpha()])  # set of all characters in cipher text
-        super().__init__(self.generate_default_key(cipher_text))
+
+        if optional_key:
+            super().__init__(optional_key)
+
+            if set(self.keys()) != self._valid_chars:  # verify the optional key is good
+                raise AttributeError("Cipher key must have the same dictionary keys as unique chars in the cipher text")
+        else:  # if no key submitted generate one from the cipher_text
+            super().__init__(self.generate_default_key(cipher_text))
 
     def __setitem__(self, k, v):
         """
@@ -22,7 +30,7 @@ class CipherKey(dict):
 
         if k not in self._valid_chars:
             raise AttributeError(f"{k} is not a valid character in the Cipher Text")
-        
+
         if not isinstance(v, str):
             raise TypeError(f"Second argument must be of type str")
 
@@ -31,7 +39,7 @@ class CipherKey(dict):
 
         if not v.isalpha() and v != "_":
             raise AttributeError(f"Value must be alpha or `_`")
-        
+
         super().__setitem__(k, v.lower())
 
     def reset(self, cipher_text=None):

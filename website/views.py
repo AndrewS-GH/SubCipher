@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, request, flash, jsonify, make_response
-from . import cipher
+from .cipher import Cipher
 
 views = Blueprint('views', __name__)
 
-cipherObj = None  # object for all methods relating to cipher
+cipher = None  # object for all methods relating to cipher
 
 @views.route('/', methods=['GET', 'POST'])
 def home():
@@ -12,13 +12,12 @@ def home():
 @views.route('/sendCT', methods = ['GET', 'POST'])
 def sendCT():
     if request.method == "POST":
-        global cipherObj
-        cipherObj = cipher.Cipher(request.get_json())
+        global cipher
+        cipher = Cipher(request.get_json())
         results = {
-            "key": cipherObj.getKey(as_str=True),
-            "orig": cipherObj.getOrig()
+            "key": cipher.get_key(as_str=True),
+            "orig": cipher.get_original()
         }
-        print(results)
         return jsonify(results)
 
 @views.route('/modKey', methods = ['GET', 'POST'])
@@ -27,57 +26,47 @@ def modKey():
         result = request.get_json()
         firstCol = result["first"].split()
         secondCol = result["second"].split()
-        keyDict = {}
-        for i in range(len(firstCol)):
-            keyDict[firstCol[i]] = secondCol[i]
-        cipherObj.modifyKey(keyDict)        
+        key = dict(zip(firstCol, secondCol))
 
-    return jsonify(cipherObj.getCipher())
+        cipher.modify_key_from_dict(key)
+
+    return jsonify(cipher.get_cipher())
 
 @views.route('/swapByFreq', methods = ['POST', 'GET'])
 def swapByFreq():
     if request.method == "POST":
-        cipherObj.swapByFreq()
+        cipher.swap_by_frequency()
         results = {
-            "key": cipherObj.getKey(),
-            "plaintext": cipherObj.getCipher()
+            "key": cipher.get_key(as_str=True),
+            "plaintext": cipher.get_cipher()
         }
         return jsonify(results)
 
 @views.route('/genSS', methods = ['POST', 'GET'])
 def genSS():
     if request.method == "POST":
-        result=request.get_json()
-        dictList = []
-        for key, value in cipherObj.getCommSS(int(result)).items():
-            temp = [key,value]
-            dictList.append(temp)
+        result = request.get_json()
+        common_ss = list(cipher.get_common_substrings(int(result)).items())
 
-        return jsonify(dictList)
+        return jsonify(common_ss)
 
 @views.route('/genWord', methods = ['POST', 'GET'])
 def genWord():
     if request.method == "POST":
-        result=request.get_json()
-        dictList = []
-        for key, value in cipherObj.getCommWords(int(result)).items():
-            temp = [key,value]
-            dictList.append(temp)
-
-        return jsonify(dictList)
+        result = request.get_json()
+        common_words = list(cipher.get_common_words(int(result)).items())
+        
+        return jsonify(common_words)
 
 @views.route('/dupSS', methods = ['POST', 'GET'])
 def dupSS():
     if request.method == "POST":
-        dictList = []
-        for key, value in cipherObj.getDupSS().items():
-            temp = [key,value]
-            dictList.append(temp)
+        duplicate_ss = list(cipher.get_duplicate_substrings().items())
+        return jsonify(duplicate_ss)
 
-        return jsonify(dictList)
 
 @views.route('/resetCipher', methods = ['POST', 'GET'])
 def resetCipher():
     if request.method == "POST":
-        cipherObj.reset()
+        cipher.reset()
         return ""
